@@ -10,3 +10,5 @@
         2) under "src/" directory clone from Github.
             git clone https://github.com/ros/ros_tutorials.git
         3) run the python tutorials
+    3. New class and structures:
+        Agent -- with or without learning function?
