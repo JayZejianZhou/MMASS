@@ -4,6 +4,7 @@
         bash -i -c "/snap/pycharm-professional/226/bin/pycharm.sh" %f
         or the directory "226" can be changed according to the versions.
         See this https://intellij-support.jetbrains.com/hc/en-us/community/posts/360003296119-Integrating-ROS-with-Pycharm
+        This command line needs to be run every time you want to start PyCharm with ROS
     2. test with ROS_tutorial.
         1) Make catkin work space
         2) under "src/" directory clone from Github.
