@@ -1,0 +1,2 @@
+
+-DCATKIN_DEVEL_PREFIX=/home/zejian/MASSims/devel -DCMAKE_INSTALL_PREFIX=/home/zejian/MASSims/install -G Unix Makefiles
