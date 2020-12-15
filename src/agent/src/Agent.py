@@ -1,5 +1,6 @@
 # 2020-12-14 Agent.py package main file, created and maintained by Zejian Zhou
 import utilities
+import numpy as np
 
 class Agent(object):
     """ constructor
@@ -23,15 +24,16 @@ class Agent(object):
     def __basic_dynam(self, state, action):
         return state+action
 
-    # TODO: set the input as the function handler
-    # TODO: can input the continuous dynamics
     def __dynamics(self, action):
-        self.state = self.dt * self.dynam(state=self.state, action=action) #update the state
+        self.state = self.state + self.dt * self.dynam(state=self.state, action=action) #update the state
 
     """ call this function to let the agent run for one step
      action -- the control input list
      steps -- the step number """
 
     def move_steps(self, action, steps):
+        states = []# save the trajectory
         for i in range(steps):
+            states.append(self.state)
             self.__dynamics(action[i])
+        return states
