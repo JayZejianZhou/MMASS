@@ -12,3 +12,5 @@
         3) run the python tutorials
     3. New class and structures:
         Agent -- with or without learning function?
+2020.12.15
+    1. the @ operator equals to np.dot() after Python 3.5
