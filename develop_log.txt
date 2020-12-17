@@ -14,3 +14,6 @@
         Agent -- with or without learning function?
 2020.12.15
     1. the @ operator equals to np.dot() after Python 3.5
+    2. animation: remove previous surf to speed up.
+    3. when initializing FPK instant, let the drag to be around 1e-10
+    4. why drag=1e-20 is super slow
