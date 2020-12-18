@@ -17,3 +17,44 @@
     2. animation: remove previous surf to speed up.
     3. when initializing FPK instant, let the drag to be around 1e-10
     4. why drag=1e-20 is super slow
+
+ 2020.12.17
+    1. +To construct a ROS python package, you need to first use
+        catkin_create_pkg "package name" rospy
+        to construct a package folder. The package has to be under the main project src/ folder
+
+        +Then, add "__init__.py" and "setup.py" under the package root folder so it looks like
+        --my package
+            --subpackage1
+                --__init__.py
+                --fun1.py
+                --fun2,py
+            --subpackage2
+            --__init__.py
+            --setup.py
+
+        +Edit those two files
+        +In the "CMakeLists.txt" file, enable this line
+            catkin_python_setup()
+        +catkin_make
+        +source devel/setup.bash  You have to source the command window every time you wanna import the package
+        +import the package
+
+        see http://docs.ros.org/en/api/catkin/html/howto/format2/installing_python.html
+
+    2. To make a rosrun script possible
+        +chmod u+x "script name"
+        +In "CMakeLists.txt", enable
+            catkin_install_python(PROGRAMS "script name"
+          DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
+         +rosrun my_pkg hello
+
+        see http://wiki.ros.org/rospy_tutorials/Tutorials/Makefile
+        http://www.artificialhumancompanions.com/structure-python-based-ros-package/
+
+ 2020-12-18
+    1. You have to mark the src folder as source
+    2. Transfer to ROS2 for MAS support
+        activate virtual environment:
+        legal ROS base name
+            source venveROS2/bin/activate

@@ -1,12 +1,11 @@
-# 2020-12-14 main tester of the Agent.py package. Created and maintained by Zejian Zhou
-from Agent import Agent
+#!/usr/bin/env python
+import rospy
+from std_msgs.msg import String
+from Simulator import Simulator
 import numpy as np
 from scipy import linalg
-import utilities
-from src.FPK_solver import gaussian_pdf
-
-#TODO: python version ADP
-#TODO: connect with the FPK solver
+from vanilla_agent import utilities
+from FPK_solver import gaussian_pdf
 
 
 dt = 0.1 #delta t to discretize the dynamics in temporal space
@@ -50,25 +49,25 @@ def linear_actions(state):
     return np.dot(-k, state)
 
 
-# generate a new agent
-i_agent = Agent(init_state=np.array([[1], [1]]),
-                init_action=np.array([[2], [2]]),
-                dt=dt,
-                dynam=linear_dynamics)
-### FPK agent
-nm = 1e-9
-pdf = gaussian_pdf(center=(200 * nm, 200 * nm), width=30 * nm)
-Pt=i_agent.solve_fpk(drift_force=linear_dynamics_fpk, pdf=pdf)
-utilities.original_fpk_plotter(i_agent, Pt)
+def talker():
+    pub = rospy.Publisher('chatter', String, queue_size=10)
+    rospy.init_node('talker', anonymous=True)
+    rate = rospy.Rate(10) # 10hz
+    while not rospy.is_shutdown():
+        hello_str = "hello world %s" % rospy.get_time()
+        rospy.loginfo(hello_str)
+        pub.publish(hello_str)
+        rate.sleep()
 
-### one single agent
-# generate test action list
-# steps = 200
-# states = []
-# for i in range(steps):
-#     action = linear_actions(i_agent.state)
-#     states.append(i_agent.move_steps(action=np.asarray(action), steps=1)[0])
+if __name__ == '__main__':
+    try:
+        aNum=3
+        init_states=[np.array([[1],[1]]),   np.array([[2],[2]]), np.array([[3],[3]])]
+        this_simulator=Simulator(aNum=aNum,
+                                 init_states=init_states,
+                                 init_dynams=linear_dynamics_fpk)
 
-#simply plot the states
-# utilities.simple_plot_states(states)
-pass
+
+
+    except rospy.ROSInterruptException:
+        pass

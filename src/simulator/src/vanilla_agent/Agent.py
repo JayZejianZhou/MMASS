@@ -1,7 +1,7 @@
+#!/usr/bin/env python
 # 2020-12-14 Agent.py package main file, created and maintained by Zejian Zhou
 import numpy as np
-from src.FPK_solver import fokker_planck, boundary
-
+from FPK_solver import fokker_planck, boundary
 
 class Agent(object):
     """ constructor
@@ -10,7 +10,7 @@ class Agent(object):
      dynam -- the system dynamics as a function handler
      dt -- the simulation segment duration"""
 
-    def __init__(self, init_state, init_action, dt=0.01, dynam = None):
+    def __init__(self, init_state, init_action=None, dt=0.01, dynam = None):
         self.state = init_state
         self.action = init_action
         self.dt = dt
@@ -28,7 +28,7 @@ class Agent(object):
     def __dynamics(self, action):
         self.state = self.state + self.dt * self.dynam(state=self.state, action=action) #update the state
 
-    """ call this function to let the agent run for one step
+    """ call this function to let the vanilla_agent run for one step
      action -- the control input list
      steps -- the step number """
 
@@ -57,3 +57,4 @@ class Agent(object):
         self.Nsteps = 500
         time, Pt = self.solver.propagate_interval(pdf, 20e-3, Nsteps=self.Nsteps)
         return Pt
+    

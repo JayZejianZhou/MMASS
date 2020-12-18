@@ -24,7 +24,7 @@ def simple_plot_states(states):
 
 
 """the FPK PDF plotter from the FPK package
-    this_agent -- the agent instance
+    this_agent -- the vanilla_agent instance
     Pt -- the sequence of time evolution of the PDF
 """
 
