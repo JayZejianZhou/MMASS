@@ -54,3 +54,5 @@ CATKIN_IGNORE
 /src/.idea/
 /src/ros_tutorials/
 /docs/build/
+/install/
+/log/
