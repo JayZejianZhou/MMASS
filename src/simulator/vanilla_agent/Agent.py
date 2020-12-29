@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 # 2020-12-14 Agent.py package main file, created and maintained by Zejian Zhou
 import numpy as np
-from FPK_solver import fokker_planck, boundary
+from simulator.fpk_solver.solver import fokker_planck
+from simulator.fpk_solver.utility import boundary
 
 class Agent(object):
     """ constructor

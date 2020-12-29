@@ -4,12 +4,11 @@ from scipy.linalg import expm
 from scipy import sparse
 from scipy.sparse.linalg import expm, eigs, expm_multiply
 import enum
-import fplanck
-from fplanck.utility import value_to_vector, slice_idx 
+from .utility import value_to_vector, slice_idx,boundary
 
 class fokker_planck:
     def __init__(self, *, temperature, drag, extent, resolution,
-            potential=None, force=None, boundary=fplanck.boundary.reflecting):
+            potential=None, force=None, boundary=boundary.reflecting):
         """
         Solve the Fokker-Planck equation
 
@@ -92,13 +91,13 @@ class fokker_planck:
                 self.Lt[i] = self.diffusion[i]/self.resolution[i]**2
 
         for i in range(self.ndim):
-            if self.boundary[i] == fplanck.boundary.reflecting:
+            if self.boundary[i] == boundary.reflecting:
                     idx = slice_idx(i, self.ndim, -1)
                     self.Rt[i][idx] = 0
 
                     idx = slice_idx(i, self.ndim, 0)
                     self.Lt[i][idx] = 0
-            elif self.boundary[i] == fplanck.boundary.periodic:
+            elif self.boundary[i] == boundary.periodic:
                     idx = slice_idx(i, self.ndim, -1)
                     dU = -self.force_values[i][idx]*self.resolution[i]
                     self.Rt[i][idx] = self.diffusion[i][idx]/self.resolution[i]**2*np.exp(-self.beta[i]*dU/2)

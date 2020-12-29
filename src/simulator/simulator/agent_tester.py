@@ -3,7 +3,7 @@ from vanilla_agent.Agent import Agent
 import numpy as np
 from scipy import linalg
 from vanilla_agent import utilities
-from FPK_solver import gaussian_pdf
+from .fpk_solver import gaussian_pdf
 
 #TODO: python version ADP
 #TODO: connect with the FPK solver
@@ -49,26 +49,29 @@ def linear_actions(state):
     k = 1 / R * np.dot(np.transpose(b), P)
     return np.dot(-k, state)
 
+def main():
+    # generate a new vanilla_agent
+    i_agent = Agent(init_state=np.array([[1], [1]]),
+                    init_action=np.array([[2], [2]]),
+                    dt=dt,
+                    dynam=linear_dynamics)
+    ### FPK vanilla_agent
+    nm = 1e-9
+    pdf = gaussian_pdf(center=(200 * nm, 200 * nm), width=30 * nm)
+    Pt=i_agent.solve_fpk(drift_force=linear_dynamics_fpk, pdf=pdf)
+    utilities.original_fpk_plotter(i_agent, Pt)
 
-# generate a new vanilla_agent
-i_agent = Agent(init_state=np.array([[1], [1]]),
-                init_action=np.array([[2], [2]]),
-                dt=dt,
-                dynam=linear_dynamics)
-### FPK vanilla_agent
-nm = 1e-9
-pdf = gaussian_pdf(center=(200 * nm, 200 * nm), width=30 * nm)
-Pt=i_agent.solve_fpk(drift_force=linear_dynamics_fpk, pdf=pdf)
-utilities.original_fpk_plotter(i_agent, Pt)
+    ### one single vanilla_agent
+    # generate test action list
+    # steps = 200
+    # states = []
+    # for i in range(steps):
+    #     action = linear_actions(i_agent.state)
+    #     states.append(i_agent.move_steps(action=np.asarray(action), steps=1)[0])
 
-### one single vanilla_agent
-# generate test action list
-# steps = 200
-# states = []
-# for i in range(steps):
-#     action = linear_actions(i_agent.state)
-#     states.append(i_agent.move_steps(action=np.asarray(action), steps=1)[0])
+    #simply plot the states
+    # utilities.simple_plot_states(states)
+    pass
 
-#simply plot the states
-# utilities.simple_plot_states(states)
-pass
+if __name__ == '__main__':
+    main()

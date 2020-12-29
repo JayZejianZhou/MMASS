@@ -2,7 +2,7 @@
 pre-defined convenience probability distribution functions
 """
 import numpy as np
-from fplanck.utility import value_to_vector
+from .utility import value_to_vector
 
 def delta_function(r0):
     """a discrete equivalent of a dirac-delta function centered at r0"""

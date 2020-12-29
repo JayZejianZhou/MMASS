@@ -17,3 +17,13 @@
     2. animation: remove previous surf to speed up.
     3. when initializing FPK instant, let the drag to be around 1e-10
     4. why drag=1e-20 is super slow
+2020.12.18
+    1. switch to ROS2
+    2. In ROS2, the package XML needs to be edited.
+        +If you claim package in "setup.py", the package can be used universal.
+        +claim a runner
+            'service = simulator.main_tester:main'
+
+2020.12.26
+    1. To write a service, you have to make the service and client name the same.
+    2.

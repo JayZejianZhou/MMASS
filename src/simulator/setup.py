@@ -20,8 +20,10 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'service = vanilla_agent.main_tester:main'
-            'ros_tester = simulator.simulator_tester:main'
+            'agent_test = simulator.agent_tester:main',
+            'agent_group_test = simulator.agent_team_tester:main',
+            'clock_server = simulator.clock.run_turn_based_clocker:main',
+            'clock_client_test = simulator.clock_client_test:main'
         ],
     },
 )
