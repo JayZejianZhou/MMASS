@@ -23,7 +23,8 @@ setup(
             'agent_test = simulator.agent_tester:main',
             'agent_group_test = simulator.agent_team_tester:main',
             'clock_server = simulator.clock.run_turn_based_clocker:main',
-            'clock_client_test = simulator.clock_client_test:main'
+            'clock_client_test = simulator.clock_client_test:main',
+            'main = simulator.main:main'
         ],
     },
 )
