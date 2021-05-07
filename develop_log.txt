@@ -26,4 +26,8 @@
 
 2020.12.26
     1. To write a service, you have to make the service and client name the same.
-    2.
+
+
+2021.1.25
+    1. install the DARPA map, you must use ignition, not vrep. The map does not load in vrep
+    2. Install the docker with CE and gpu version tergether. https://github.com/osrf/subt/wiki/Get%20Started
